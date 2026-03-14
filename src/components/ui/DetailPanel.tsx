@@ -26,14 +26,9 @@ export function DetailPanel({ open, onClose }: DetailPanelProps) {
   const setZoneProduct = useVenueStore(s => s.setZoneProduct)
   const venueType = useVenueStore(s => s.venueType)
 
-  if (!selectedZoneId || !open) return null
+  if (!open) return null
 
   const zone = zones.find(z => z.id === selectedZoneId)
-  if (!zone) return null
-
-  const envFilter = venueType === 'nfl' ? 'outdoor' : 'indoor'
-  const filteredProducts = products.filter(p => p.environment === envFilter || p.environment === 'both')
-  const currentProduct = products.find(p => p.id === zone.product)
 
   const selectStyle: React.CSSProperties = {
     width: '100%',
@@ -47,6 +42,33 @@ export function DetailPanel({ open, onClose }: DetailPanelProps) {
     outline: 'none',
   }
 
+  if (!zone) {
+    return (
+      <div className="absolute bottom-4 rounded-[24px] p-4 anc-detail-panel" style={{ left: '320px', right: '320px' }}>
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <div className="text-[10px] uppercase tracking-[2px] mb-1" style={{ fontFamily: 'Oswald, sans-serif', color: '#5a7a9a' }}>
+              Zone Editor
+            </div>
+            <div className="text-lg tracking-wide" style={{ fontFamily: 'Oswald, sans-serif' }}>
+              Select a zone to edit
+            </div>
+            <div className="text-[11px] mt-1" style={{ color: '#6f88a0' }}>
+              Use the zone list to switch a placement on, then click its name to update sponsor, content, and product.
+            </div>
+          </div>
+          <button onClick={onClose} className="anc-toolbar-button">
+            Hide Editor
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  const envFilter = venueType === 'nfl' ? 'outdoor' : 'indoor'
+  const filteredProducts = products.filter(p => p.environment === envFilter || p.environment === 'both')
+  const currentProduct = products.find(p => p.id === zone.product)
+
   return (
     <div className="absolute bottom-4 rounded-[24px] p-4 anc-detail-panel" style={{ left: '320px', right: '320px' }}>
       <div className="flex justify-between items-start gap-4 mb-4">
@@ -55,7 +77,9 @@ export function DetailPanel({ open, onClose }: DetailPanelProps) {
             Zone Editor
           </div>
           <div className="text-lg tracking-wide truncate" style={{ fontFamily: 'Oswald, sans-serif' }}>{zone.name}</div>
-          <div className="text-[11px] mt-1 max-w-[560px]" style={{ color: '#6f88a0' }}>{zone.description}</div>
+          <div className="text-[11px] mt-1 max-w-[560px]" style={{ color: '#6f88a0' }}>
+            Adjust the sponsor, content type, and LED product for this placement.
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -67,7 +91,7 @@ export function DetailPanel({ open, onClose }: DetailPanelProps) {
             <span />
           </button>
           <button onClick={onClose} className="anc-toolbar-button">
-            Close
+            Hide Editor
           </button>
         </div>
       </div>

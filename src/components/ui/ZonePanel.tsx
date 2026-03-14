@@ -20,6 +20,21 @@ export function ZonePanel({ open }: ZonePanelProps) {
       style={{ top: '84px', width: '286px', maxHeight: 'calc(100vh - 160px)' }}>
 
       <div className="anc-panel rounded-2xl p-4">
+        <div className="rounded-2xl px-3 py-3 mb-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+          <div className="text-[10px] uppercase tracking-[2px] mb-2" style={{ fontFamily: 'Oswald, sans-serif', color: '#5a7a9a' }}>
+            How To Demo This
+          </div>
+          <div className="text-[11px] leading-5" style={{ color: '#c9d9e7' }}>
+            1. Choose a venue at the top.
+          </div>
+          <div className="text-[11px] leading-5" style={{ color: '#c9d9e7' }}>
+            2. Turn zones on with the switch.
+          </div>
+          <div className="text-[11px] leading-5" style={{ color: '#c9d9e7' }}>
+            3. Click a zone name to edit sponsor, content, and product.
+          </div>
+        </div>
+
         <div className="mb-3 flex items-end justify-between gap-3">
           <div>
             <div className="text-[10px] uppercase tracking-[2px] mb-1" style={{ fontFamily: 'Oswald, sans-serif', color: '#5a7a9a' }}>
@@ -57,7 +72,7 @@ export function ZonePanel({ open }: ZonePanelProps) {
                     <span className="truncate text-[12px] font-medium" style={{ color: '#f4fbff' }}>{zone.name}</span>
                   </div>
                   <div className="mt-1 text-[10px] leading-4" style={{ color: '#6f88a0' }}>
-                    {zone.description}
+                    Click to edit this placement
                   </div>
                 </button>
 

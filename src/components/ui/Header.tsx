@@ -4,19 +4,15 @@ import { VenueSwitcher } from './VenueSwitcher'
 interface HeaderProps {
   zonesOpen: boolean
   insightsOpen: boolean
-  detailOpen: boolean
   onToggleZones: () => void
   onToggleInsights: () => void
-  onToggleDetail: () => void
 }
 
 export function Header({
   zonesOpen,
   insightsOpen,
-  detailOpen,
   onToggleZones,
   onToggleInsights,
-  onToggleDetail,
 }: HeaderProps) {
   const simulating = useVenueStore(s => s.simulating)
   const toggleSimulation = useVenueStore(s => s.toggleSimulation)
@@ -37,7 +33,7 @@ export function Header({
               ANC VENUE VISION
             </h1>
             <p className="text-[9px] uppercase tracking-[2px]" style={{ color: '#5a7a9a' }}>
-              Cleaner control view for venue sales previews
+              Pick a venue, turn zones on, then click a zone to edit it
             </p>
           </div>
         </div>
@@ -46,19 +42,15 @@ export function Header({
           <VenueSwitcher />
 
           <button onClick={onToggleZones} className={`anc-toolbar-button ${zonesOpen ? 'anc-toolbar-button--active' : ''}`}>
-            {zonesOpen ? 'Hide Zones' : 'Show Zones'}
+            {zonesOpen ? 'Hide Zone List' : 'Show Zone List'}
           </button>
 
           <button onClick={onToggleInsights} className={`anc-toolbar-button ${insightsOpen ? 'anc-toolbar-button--active' : ''}`}>
-            {insightsOpen ? 'Hide Insights' : 'Show Insights'}
-          </button>
-
-          <button onClick={onToggleDetail} className={`anc-toolbar-button ${detailOpen ? 'anc-toolbar-button--active' : ''}`}>
-            {detailOpen ? 'Hide Editor' : 'Show Editor'}
+            {insightsOpen ? 'Hide Revenue' : 'Show Revenue'}
           </button>
 
           <button onClick={toggleSimulation} className={`anc-toolbar-button ${simulating ? 'anc-toolbar-button--accent' : ''}`}>
-            {simulating ? 'Stop Simulation' : 'Run Simulation'}
+            {simulating ? 'Stop Auto Demo' : 'Start Auto Demo'}
           </button>
 
           <button onClick={resetCamera} className="anc-toolbar-button">
@@ -68,6 +60,12 @@ export function Header({
           <span className="anc-status-pill">
             {activeCount}/{zones.length} Active
           </span>
+
+          {simulating && (
+            <span className="anc-status-pill">
+              Auto demo is cycling screen content
+            </span>
+          )}
         </div>
       </div>
     </div>

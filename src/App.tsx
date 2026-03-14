@@ -11,7 +11,7 @@ export default function App() {
   const selectedZoneId = useVenueStore(s => s.selectedZoneId)
   const [zonesOpen, setZonesOpen] = useState(true)
   const [insightsOpen, setInsightsOpen] = useState(true)
-  const [detailOpen, setDetailOpen] = useState(false)
+  const [detailOpen, setDetailOpen] = useState(true)
 
   useEffect(() => {
     if (selectedZoneId) {
@@ -43,10 +43,8 @@ export default function App() {
         <Header
           zonesOpen={zonesOpen}
           insightsOpen={insightsOpen}
-          detailOpen={detailOpen}
           onToggleZones={() => setZonesOpen(open => !open)}
           onToggleInsights={() => setInsightsOpen(open => !open)}
-          onToggleDetail={() => setDetailOpen(open => !open)}
         />
         <ZonePanel open={zonesOpen} />
         <RevenuePanel open={insightsOpen} />
